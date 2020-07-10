@@ -13,3 +13,7 @@ interface NewsItem {
 export interface IApiService {
   index (): Promise<IApiResult>
 }
+
+export interface IGraphqlService{
+
+}
