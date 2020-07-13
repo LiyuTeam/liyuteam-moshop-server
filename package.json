@@ -8,6 +8,7 @@
     "dataloader": "^2.0.0",
     "egg-scripts": "^2.10.0",
     "graphql": "^15.3.0",
+    "graphql-query-complexity": "^0.6.0",
     "midway": "^1.0.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
@@ -83,7 +84,19 @@
   },
   "egg": {
     "typescript": true,
-    "declarations": true
+    "declarations": true,
+    "framework": "egg",
+    "tsHelper": {
+      "watchDirs": {
+        "model": {
+          "directory": "src/app/",
+          "interface": "app",
+          "enabled": true,
+          "interfaceHandle": "InstanceType<{{ 0 }}>",
+          "dist": "typings/typings.d.ts"
+        }
+      }
+    }
   },
   "author": "ykfe",
   "license": "MIT"

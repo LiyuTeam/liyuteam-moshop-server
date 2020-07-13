@@ -6,7 +6,6 @@
 # 数据字典
 type Dictionary {
   _id: String!
-  comment: String!
   created_at: Timestamp!
   dictType: Float!
   mainCode: String!
@@ -20,6 +19,19 @@ type Dictionary {
 
 # The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
 scalar Timestamp
+
+# 数据字典值
+type DictionaryValue {
+  fkDict: String!
+  name: String!
+  title: String!
+  value: String!
+  valueType: Float!
+  created_at: Timestamp!
+  status: Float!
+  uid: String!
+  updated_at: Timestamp!
+}
 
 # 表单文本字段
 type FormFieldTextConfig {
@@ -92,7 +104,7 @@ interface UserAccountAPIInterface {
   updatedAt: Timestamp!
 }
 
-# Add New Dictionary
+# 增加一个数据字典
 input AddDictionaryInput {
   dictType: Float
   mainCode: String!
@@ -102,7 +114,7 @@ input AddDictionaryInput {
 }
 
 type Query {
-  getDictnary(subCode: String, mainCode: String): [Dictionary!]!
+  getDictionary(subCode: String, mainCode: String): [Dictionary!]!
   getPage(pageKey: String): [PageConfig!]!
   getFormByPage(formKey: String): [FormConfig!]!
   getUser(account: String): UserAccount!
