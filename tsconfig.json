@@ -23,6 +23,12 @@
     "target": "ES2017",
     "jsx": "react"
   },
+  "baseUrl": ".",
+  "paths": {
+    "~/*": [ "./*" ],
+    "@@/*": ["src/app/"],
+    "@/*": ["src/"]
+  },
   "exclude": [
     "app/public",
     "app/views",

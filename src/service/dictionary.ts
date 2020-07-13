@@ -1,14 +1,11 @@
-import {provide,Context, inject} from "midway";
-import {BaseEntity, getRepository} from "typeorm/index";
+import { Context, inject, provide } from "midway";
 
-@provide('DictionaryService')
+@provide("DictionaryService")
 export class DictionaryService {
+  @inject() ctx: Context;
+  @inject("DictionaryEntity") DictionaryEntity: DictionaryEntityType;
 
-    @inject() ctx:Context
-    @inject('DictionaryEntity') DictionaryEntity:DictionaryEntityType
-
-    async getDictionary() {
-        const dictRepo = await getRepository(this.DictionaryEntity as BaseEntity)
-    }
-
+  async getDictionary() {
+    // const dictRepo = await getRepository(this.Dictionary as BaseEntity)
+  }
 }

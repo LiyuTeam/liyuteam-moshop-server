@@ -89,11 +89,10 @@
     "tsHelper": {
       "watchDirs": {
         "model": {
-          "directory": "src/app/",
-          "interface": "app",
+          "directory": "src/app",
+          "interface": "APP",
           "enabled": true,
-          "interfaceHandle": "InstanceType<{{ 0 }}>",
-          "dist": "typings/typings.d.ts"
+          "interfaceHandle": "'{{ 0 }} & { [key: string]: any }'"
         }
       }
     }
