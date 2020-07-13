@@ -1,15 +1,17 @@
 import 'reflect-metadata';
+import {Application} from 'midway';
+// import {Application} from 'midway';
+// import {IBoot} from 'midway';
 
-
-module.exports = (app: { [x: string]: any; beforeStart: (arg0: () => Promise<void>) => void; applicationContext: { getAsync: (arg0: string) => any; }; }) => {
+module.exports = (app: Application) => {
     app.beforeStart(
         async () => {
-            const extendList = ['eggTsGraphql', 'eggTsTypeorm'];
-            extendList.map(item => app[item].init())
+            const graphqlService = await app.applicationContext.getAsync('GraphqlService');
+            await graphqlService.start(app);
         }
     )
 }
-
+//
 // export default class AppBoot implements IBoot {
 //     private readonly app: Application;
 //
@@ -17,10 +19,10 @@ module.exports = (app: { [x: string]: any; beforeStart: (arg0: () => Promise<voi
 //         this.app = app;
 //     }
 //
-//     async serverDidReady() {
+//     async didReady() {
 //         const {app} = this;
-//         await app.applicationContext.getAsync('typeGraphql');
-//         await app.typeOrm.init();
-//         app.logger.info(`${app.typeGraphql.symbol.toString()} started`);
+//         await app.applicationContext.getAsync('LoggerService');
+//         const graphqlService = await app.applicationContext.getAsync('GraphqlService');
+//         await graphqlService.start(app);
 //     }
 // }

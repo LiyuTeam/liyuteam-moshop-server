@@ -1,4 +1,3 @@
-import {EggTsGraphql} from './lib/eggTsGraphql/EggTsGraphqlServer';
 import {EggTsTypeorm} from './lib/eggTsTypeorm/TypeOrmService';
 import {Application} from 'midway';
 
@@ -13,15 +12,6 @@ const getPrototype = (
 }
 
 module.exports = {
-    get eggTsGraphql() {
-        if(!this[EggTsGraphql.SYMBOL]){
-            this[EggTsGraphql.SYMBOL] = new EggTsGraphql.AppExtend(this,EggTsGraphql.SYMBOL);
-        }
-        return this[EggTsGraphql.SYMBOL];
-
-
-        return getPrototype(EggTsGraphql, this);
-    },
     get eggTsTypeorm() {
         return getPrototype(EggTsTypeorm, this)
     }

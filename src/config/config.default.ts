@@ -1,4 +1,5 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'midway'
+import GraphqlConfig from './public/config.graphql';
 const path = require('path')
 export type DefaultConfig = PowerPartial<EggAppConfig>
 interface MyEggAppInfo extends EggAppInfo {
@@ -6,7 +7,6 @@ interface MyEggAppInfo extends EggAppInfo {
 }
 export default (appInfo: MyEggAppInfo) => {
   const config = {} as DefaultConfig
-
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1570684373953_5206'
 
@@ -14,9 +14,18 @@ export default (appInfo: MyEggAppInfo) => {
   config.middleware = [
 
   ]
+
+  config.graphql = GraphqlConfig(appInfo)
+
   config.static = {
     dir: [path.join(appInfo.appDir, '/output'), path.join(appInfo.appDir, '/src/app/public')],
     prefix: '/'
+  }
+  
+  config.security = {
+    csrf:{
+      ignore:['/graphql']
+    }
   }
   return config
 }
