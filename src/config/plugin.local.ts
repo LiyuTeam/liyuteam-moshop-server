@@ -4,5 +4,5 @@ export default {
   proxy: {
     package: 'egg-proxy',
     enable: true
-  }
+  },
 } as EggPlugin

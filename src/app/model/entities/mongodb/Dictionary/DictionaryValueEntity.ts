@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne } from "typeorm";
-import Dictionary from "./Dictionary";
-import { MongodbEntity } from "../../../libs/baseEntity";
+import DictionaryEntity from "./DictionaryEntity";
+import { MongodbEntity } from "../../../util/baseEntity";
 import { Field, Int, ObjectType } from "type-graphql";
 import { toolkit } from "../../../../extend/helpers/toolkit";
 
@@ -17,14 +17,14 @@ const SYMBOL = "DictionaryValue";
 
 @Entity({ name: toolkit.Symbol2TableName(SYMBOL, "sys") })
 @ObjectType(SYMBOL, { description: "字典值" })
-class DictionaryValue extends MongodbEntity
-  implements DictionaryValueEntityType {
-  @Field(type => Dictionary)
+class DictionaryValueEntity extends MongodbEntity
+  implements IDictionaryValuesEntity {
+  @Field(type => DictionaryEntity)
   @ManyToOne(
-    type => Dictionary,
+    type => DictionaryEntity,
     dictionary => dictionary.uid
   )
-  fkDict: Dictionary;
+  fkDict: DictionaryEntity;
 
   @Field({ description: "字典值名" })
   @Column()
@@ -43,4 +43,4 @@ class DictionaryValue extends MongodbEntity
   valueType: number;
 }
 
-export default DictionaryValue;
+export default DictionaryValueEntity;

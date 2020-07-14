@@ -1,4 +1,4 @@
-interface GraphQLConfig {
+export declare type GraphQLConfigType = {
     router: string,
     // 是否加载到 app 上，默认开启
     app: boolean,
@@ -12,4 +12,14 @@ interface GraphQLConfig {
         origin: string,
         allowMethods: string,
     },
+}
+
+export declare type DatabaseConfigType = {
+    clients: {
+        type: string,
+        name: string,
+        host: string,
+        username?: string,
+        password?: string,
+    }[]
 }

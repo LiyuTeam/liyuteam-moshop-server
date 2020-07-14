@@ -1,5 +1,6 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'midway'
 import GraphqlConfig from './public/config.graphql';
+import DataBaseConfig from './public/config.database';
 const path = require('path')
 export type DefaultConfig = PowerPartial<EggAppConfig>
 interface MyEggAppInfo extends EggAppInfo {
@@ -16,7 +17,8 @@ export default (appInfo: MyEggAppInfo) => {
   ]
 
   config.graphql = GraphqlConfig(appInfo)
-
+  config.dataBase = DataBaseConfig(appInfo)
+  config.typeGraphQL = GraphqlConfig(appInfo)
   config.static = {
     dir: [path.join(appInfo.appDir, '/output'), path.join(appInfo.appDir, '/src/app/public')],
     prefix: '/'

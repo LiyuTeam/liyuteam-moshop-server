@@ -1,4 +1,5 @@
 {
+  "baseUrl": ".",
   "compileOnSave": true,
   "compilerOptions": {
     "esModuleInterop": true,
@@ -21,13 +22,8 @@
     "strictPropertyInitialization": false,
     "stripInternal": true,
     "target": "ES2017",
-    "jsx": "react"
-  },
-  "baseUrl": ".",
-  "paths": {
-    "~/*": [ "./*" ],
-    "@@/*": ["src/app/"],
-    "@/*": ["src/"]
+    "jsx": "react",
+    "resolveJsonModule": true,
   },
   "exclude": [
     "app/public",
@@ -37,5 +33,21 @@
     "test",
     "**/*.spec.ts",
     "web"
-  ]
+  ],
+  "include": [
+    "src/**/*.d.ts",
+    "src/config/**/*.d.ts",
+    "typings/**/*.d.ts"
+  ],
+  "paths": {
+    "~/*": [
+      "./*"
+    ],
+    "@@/*": [
+      "src/app/"
+    ],
+    "@/*": [
+      "src/"
+    ]
+  }
 }

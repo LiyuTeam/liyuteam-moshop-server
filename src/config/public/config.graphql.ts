@@ -1,6 +1,7 @@
 import {EggAppInfo, PowerPartial} from "midway";
 import createQueryComplexityValidator, {simpleEstimator} from "graphql-query-complexity";
 import {GraphQLError} from "graphql";
+import {GraphQLConfigType} from "../index";
 
 export default (appInfo: EggAppInfo) => {
     return {
@@ -73,5 +74,5 @@ export default (appInfo: EggAppInfo) => {
                 })
             ]
         })
-    } as PowerPartial<GraphQLConfig>
+    } as PowerPartial<GraphQLConfigType>
 }

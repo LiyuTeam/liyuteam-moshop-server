@@ -1,6 +1,7 @@
 import {MongoConnectionOptions} from "typeorm/driver/mongodb/MongoConnectionOptions";
-                                     'typeorm/driver/mongodb/MongoConnectionOptions'
-export default {
+import {EggAppInfo} from "midway";
+
+export default (appInfo: EggAppInfo) => ({
     clients: [{
         type: 'mongodb',
         name: 'mongodb',
@@ -15,4 +16,4 @@ export default {
         useUnifiedTopology: true,
     } as MongoConnectionOptions,
     ],
-};
+})

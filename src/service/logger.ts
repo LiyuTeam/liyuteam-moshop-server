@@ -1,15 +1,33 @@
-import {provide, inject} from "midway"
+import {Application, inject, provide} from "midway"
+import {ILoggerService} from "../interface";
+
+export const SYMBOL = "LoggerService";
 
 /**
  * Logger 日志服务
  * @description 一个用于全局使用到日志服务
  */
-@provide('LoggerService')
-export default class Logger {
-    @inject() readonly baseDir:string;
+@provide(SYMBOL)
+class LoggerService implements ILoggerService {
 
-    log(){
+    app: Application;
+    symbol: Symbol;
+
+    constructor() {
+        this.symbol = Symbol(SYMBOL)
+    }
+
+    async start(app: Application): Promise<void> {
+
+    }
+
+    @inject()
+    readonly baseDir: string;
+
+    log() {
         console.log(...arguments);
     }
 
 }
+
+export default LoggerService

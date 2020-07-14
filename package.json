@@ -7,6 +7,7 @@
     "class-validator": "^0.12.2",
     "dataloader": "^2.0.0",
     "egg-scripts": "^2.10.0",
+    "egg-type-graphql": "^1.8.1",
     "graphql": "^15.3.0",
     "graphql-query-complexity": "^0.6.0",
     "midway": "^1.0.0",
@@ -66,9 +67,9 @@
     "node": ">=10.16.0"
   },
   "scripts": {
-    "prod": "npm run build && NODE_ENV=production egg-scripts start --title=egg-server-ssr-with-ts --framework=midway --ts",
+    "prod": "npm run build && NODE_ENV=production egg-scripts start --title=egg-server-ssr-with-ts --framework=midway --dts",
     "start": "concurrently \"npm run ssr\" \"npm run csr\"",
-    "ssr": "concurrently \"cross-env NODE_ENV=development midway-bin dev --ts\" \"cross-env NODE_ENV=development webpack --watch --config ./build/webpack.config.server.js\"",
+    "ssr": "concurrently \"cross-env NODE_ENV=development midway-bin dev --dts\" \"cross-env NODE_ENV=development webpack --watch --config ./build/webpack.config.server.js\"",
     "csr": "cross-env NODE_ENV=development ykcli dev",
     "build": "midway-bin build -c && npm run build:ssr && npm run build:csr",
     "build:ssr": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.server.js",
@@ -84,19 +85,11 @@
   },
   "egg": {
     "typescript": true,
-    "declarations": true,
-    "framework": "egg",
-    "tsHelper": {
-      "watchDirs": {
-        "model": {
-          "directory": "src/app",
-          "interface": "APP",
-          "enabled": true,
-          "interfaceHandle": "'{{ 0 }} & { [key: string]: any }'"
-        }
-      }
-    }
+    "declarations": true
   },
-  "author": "ykfe",
+  "compilerOptions": {
+    "outDirs": "./dist"
+  },
+  "author": "zico",
   "license": "MIT"
 }

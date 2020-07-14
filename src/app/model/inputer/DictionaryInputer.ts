@@ -1,8 +1,8 @@
 import { Field, InputType } from "type-graphql";
-import Dictionary from "../entities/mongodb/Dictionary/Dictionary";
+import DictionaryEntity from "../entities/mongodb/Dictionary/DictionaryEntity";
 
 @InputType({ description: "增加一个数据字典" })
-export class AddDictionaryInput implements Partial<Dictionary> {
+export class AddDictionaryInput implements Partial<DictionaryEntity> {
   @Field({ nullable: true, defaultValue: 1 })
   dictType: number;
 
