@@ -17,7 +17,7 @@ class LoggerService implements ILoggerService {
         this.symbol = Symbol(SYMBOL)
     }
 
-    async start(app: Application): Promise<void> {
+    async init(app: Application): Promise<void> {
 
     }
 

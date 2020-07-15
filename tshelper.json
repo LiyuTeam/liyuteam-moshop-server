@@ -1,21 +1,13 @@
 {
-  "watchDirs": {
-    "model": {
-      "watch": "register",
-      "directory": "src/app/model",
-      "enabled": true,
-      "typings": "{cwd}",
-      "generator": "auto",
-      "interfaceHandle": "InstanceType<{{ 0 }}>"
-    },
-    "config": {
-      "watch": "register",
-      "interface": "Config",
-      "directory": "src/config",
-      "enabled": true,
-      "typings": "{cwd}",
-      "generator": "auto",
-      "interfaceHandle": "InstanceType<{{0}}>"
+    "watchDirs": {
+        "typings": {
+            "watch": "register",
+            "interface": "Typings",
+            "directory": "src",
+            "enabled": true,
+            "typings": "{cwd}",
+            "generator": "auto",
+            "interfaceHandle": "InstanceType<{{0}}>"
+        }
     }
-  }
 }

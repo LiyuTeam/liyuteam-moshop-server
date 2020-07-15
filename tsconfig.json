@@ -1,53 +1,55 @@
 {
-  "baseUrl": ".",
-  "compileOnSave": true,
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "lib": [
-      "esnext"
+    "baseUrl": ".",
+    "compileOnSave": true,
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "lib": [
+            "esnext"
+        ],
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "incremental": true,
+        "inlineSourceMap": true,
+        "module": "commonjs",
+        "newLine": "lf",
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "outDir": "dist",
+        "pretty": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "stripInternal": true,
+        "target": "ES2017",
+        "jsx": "react",
+        "resolveJsonModule": true
+    },
+    "exclude": [
+        "app/public",
+        "app/views",
+        "dist",
+        "node_modules*",
+        "test",
+        "**/*.spec.ts",
+        "web"
     ],
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "incremental": true,
-    "inlineSourceMap": true,
-    "module": "commonjs",
-    "newLine": "lf",
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "outDir": "dist",
-    "pretty": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "stripInternal": true,
-    "target": "ES2017",
-    "jsx": "react",
-    "resolveJsonModule": true,
-  },
-  "exclude": [
-    "app/public",
-    "app/views",
-    "dist",
-    "node_modules*",
-    "test",
-    "**/*.spec.ts",
-    "web"
-  ],
-  "include": [
-    "src/**/*.d.ts",
-    "src/config/**/*.d.ts",
-    "typings/**/*.d.ts"
-  ],
-  "paths": {
-    "~/*": [
-      "./*"
+    "include": [
+        "src/**/*.d.ts",
+        "src/config/**/*.d.ts",
+        "typings/**/*.d.ts",
+        "src/@types/typings.d.ts",
+        "typings/src/index.d.ts"
     ],
-    "@@/*": [
-      "src/app/"
-    ],
-    "@/*": [
-      "src/"
-    ]
-  }
+    "paths": {
+        "~/*": [
+            "./*"
+        ],
+        "@@/*": [
+            "./src/app/*"
+        ],
+        "@/*": [
+            "./src/*"
+        ]
+    }
 }

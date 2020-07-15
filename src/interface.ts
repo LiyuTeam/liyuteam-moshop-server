@@ -1,6 +1,6 @@
-import {Application} from "midway";
-import {Connection, EntitySchema, Repository} from "typeorm/index";
-import ModelTypings from "../typings/src/app/model/index";
+import { Application } from 'midway'
+import { BaseEntity , Connection , Repository } from 'typeorm/index'
+import ModelTypings from '../typings/src/index'
 
 export interface IApiResult {
     news: NewsItem[]
@@ -9,7 +9,6 @@ export interface IApiResult {
 export interface IModel extends ModelTypings.AnyClass {
 
 }
-
 
 interface NewsItem {
     id: string,
@@ -25,7 +24,7 @@ export interface IBaseService {
     app: Application
     symbol: Symbol
 
-    start(app: Application): Promise<void>
+    init (app: Application): Promise<void>
 
 }
 
@@ -35,40 +34,40 @@ export interface IModelService extends IBaseService {
      * @param doc
      * @param props
      */
-    add(doc: any, props?: any): Promise<any> | void
+    add (doc: any , props?: any): Promise<any> | void
 
     /**
      * del action
      * @param where
      * @param delTruly
      */
-    del(where: any, delTruly?: boolean): Promise<any> | void
+    del (where: any , delTruly?: boolean): Promise<any> | void
 
     /**
      * get action
      * @param where
      */
-    get(where: any): Promise<any> | void
+    get (where: any): Promise<any> | void
 
     /**
      * list action
      * @param where
      */
-    list(where: any): Promise<any> | void
+    list (where: any): Promise<any> | void
 
     /**
      * modify action
      * @param where
      * @param doc
      */
-    modify(where: any, doc: any): Promise<any> | void
+    modify (where: any , doc: any): Promise<any> | void
 }
 
 /**
  * @description Api-Service abstractions
  */
 export interface IApiService {
-    index(): Promise<IApiResult>
+    index (): Promise<IApiResult>
 }
 
 /**
@@ -82,13 +81,13 @@ export interface IGraphqlService extends IBaseService {
  * Logger-Service abstractions
  */
 export interface ILoggerService extends IBaseService {
-    log(): void
+    log (): void
 }
 
 /**
  * Dictionary-Service abstractions
  */
-export interface IDictionaryService extends IModelService {
+export interface IDictionaryDAO extends IModelService {
 }
 
 export interface ITypeormService extends IBaseService {
@@ -97,17 +96,17 @@ export interface ITypeormService extends IBaseService {
      * 获得数据库连接
      * @param dbConfig
      */
-    getConn(clientName: string): Promise<Connection>
+    getConn (clientName: string): Promise<Connection>
 
     /**
      * 获得数据库连接 - 构造器
      * @param dbConfig
      */
-    getConnLazy(clientName: string): Function
+    getConnLazy (clientName: string): Function
 
     /**
      * 获得仓库
      * @param entity
      */
-    getRepo(entity: EntitySchema, isMongo: boolean): Promise<Repository<any>>
+    getRepo (entity: BaseEntity , isMongo: boolean): Promise<Repository<any>>
 }
