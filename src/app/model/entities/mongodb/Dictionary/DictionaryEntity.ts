@@ -1,17 +1,15 @@
 import { Column , Entity , PrimaryColumn } from 'typeorm'
-import { MongodbEntity } from '../../../util/baseEntity'
-import { provide } from 'midway'
 import { Field , Int , ObjectType } from 'type-graphql'
 import { toolkit } from '../../../../extend/helpers/toolkit'
 import DictionaryValueEntity from './DictionaryValueEntity'
-import { IDictionaryEntity } from '../index'
+import { IDictionaryEntity } from '../interface'
 
-const SYMBOL = 'Dictionary'
+export const SYMBOL = 'Dictionary'
 
-@provide('DictionaryEntity')
 @Entity({ name: toolkit.Symbol2TableName(SYMBOL , 'sys') })
 @ObjectType({ description: '数据字典项' })
-class DictionaryEntity extends MongodbEntity implements IDictionaryEntity {
+class DictionaryEntity extends IDictionaryEntity {
+
     @Field(type => Int , { description: '字典项类型' })
     @Column({ type: 'int' , default: 1 })
     dictType: number

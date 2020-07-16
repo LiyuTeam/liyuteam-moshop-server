@@ -1,25 +1,14 @@
 import { Column , Entity , ManyToOne } from 'typeorm'
 import DictionaryEntity from './DictionaryEntity'
-import { MongodbEntity } from '../../../util/baseEntity'
 import { Field , Int , ObjectType } from 'type-graphql'
 import { toolkit } from '../../../../extend/helpers/toolkit'
-import { IDictionaryValuesEntity } from '../index'
+import { IDictionaryValuesEntity } from '../interface'
 
-const SYMBOL = 'DictionaryValue'
-
-// enum valueType {
-//   "any",
-//   "string",
-//   "number",
-//   "boolean",
-//   "json",
-//   "url"
-// }
+export const SYMBOL = 'DictionaryValue'
 
 @Entity({ name: toolkit.Symbol2TableName(SYMBOL , 'sys') })
 @ObjectType(SYMBOL , { description: '字典值' })
-class DictionaryValueEntity extends MongodbEntity
-    implements IDictionaryValuesEntity {
+class DictionaryValueEntity extends IDictionaryValuesEntity {
     @Field(type => DictionaryEntity)
     @ManyToOne(
         type => DictionaryEntity ,

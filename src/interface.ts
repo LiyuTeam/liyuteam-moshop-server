@@ -1,5 +1,5 @@
 import { Application } from 'midway'
-import { BaseEntity , Connection , Repository } from 'typeorm/index'
+import { Connection , Repository } from 'typeorm/index'
 import ModelTypings from '../typings/src/index'
 
 export interface IApiResult {
@@ -94,19 +94,20 @@ export interface ITypeormService extends IBaseService {
 
     /**
      * 获得数据库连接
-     * @param dbConfig
+     * @param clientName
      */
     getConn (clientName: string): Promise<Connection>
 
     /**
      * 获得数据库连接 - 构造器
-     * @param dbConfig
+     * @param clientName
      */
     getConnLazy (clientName: string): Function
 
     /**
      * 获得仓库
      * @param entity
+     * @param isMongo
      */
-    getRepo (entity: BaseEntity , isMongo: boolean): Promise<Repository<any>>
+    getRepo (entity: any , isMongo: boolean): Promise<Repository<any>>
 }

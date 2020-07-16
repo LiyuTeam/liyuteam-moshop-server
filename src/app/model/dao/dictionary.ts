@@ -1,6 +1,6 @@
 import { IDictionaryDAO , ITypeormService , MidwayApplication } from '../../../interface'
 import { provide , inject } from 'midway'
-import { IDictionaryEntity } from '../entities/mongodb'
+import { EntitySchema } from 'typeorm/index'
 
 /**
  * DictionaryDAO
@@ -16,9 +16,6 @@ export class DictionaryDAO implements IDictionaryDAO {
     @inject('TypeormService')
     typeormService: ITypeormService
 
-    @inject('DictionaryEntity')
-    dictionaryEntity: IDictionaryEntity
-
     add (doc: any , props: any): Promise<any> | void {
         return undefined
     }
@@ -32,9 +29,10 @@ export class DictionaryDAO implements IDictionaryDAO {
     }
 
     async list (where: any) {
-        let dictionaryRepo = await this.typeormService.getRepo(
-            this.dictionaryEntity , true
-        )
+        let dictionaryRepo =
+            await this.typeormService.getRepo(
+                this.dictionaryEntity , true
+            )
 
         const result = await dictionaryRepo.find()
         return result

@@ -18,7 +18,7 @@ export default (appInfo: MyEggAppInfo) => {
     config.middleware = []
     config.env = 'local'
     config.graphql = GraphqlConfig(appInfo)
-    config.dataBase = DataBaseConfig(appInfo)
+    config.database = DataBaseConfig(appInfo)
     config.typeGraphQL = GraphqlConfig(appInfo)
     config.static = {
         dir: [path.join(appInfo.appDir , '/output') , path.join(appInfo.appDir , '/src/app/public')] ,

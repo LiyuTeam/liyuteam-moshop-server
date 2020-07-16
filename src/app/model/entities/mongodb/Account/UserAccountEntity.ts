@@ -1,8 +1,15 @@
-import { BaseEntity , Column , Entity , PrimaryGeneratedColumn } from 'typeorm'
-import { IUserAccountEntity } from '../index'
+import { Column , Entity , PrimaryGeneratedColumn } from 'typeorm'
+import { toolkit } from '../../../../extend/helpers/toolkit'
+import { IUserAccountEntity } from '../interface'
 
-@Entity({ name: 'UserAccount' })
-class UserAccount extends BaseEntity implements IUserAccountEntity {
+export const SYMBOL = 'UserAccount'
+
+/**
+ * UserAccount Entity
+ * @description 用户账号表
+ */
+@Entity({ name: toolkit.Symbol2TableName(SYMBOL , 'account') })
+class UserAccountEntity extends IUserAccountEntity {
 
     @PrimaryGeneratedColumn('uuid')
     id: string
@@ -13,10 +20,10 @@ class UserAccount extends BaseEntity implements IUserAccountEntity {
     @Column({ default: null })
     password: string
 
-    @Column({ default: null })
-    status?: 1 | 2 | 3
+    @Column({ default: 1 })
+    status: number
 
-    @Column({ default: null , comment: '是否管理员' })
+    @Column({ default: 0 , comment: '是否管理员' })
     isAdmin: number
 
     @Column({ default: null , comment: '手机' })
@@ -35,4 +42,4 @@ class UserAccount extends BaseEntity implements IUserAccountEntity {
     userName: string
 }
 
-export default UserAccount
+export default UserAccountEntity
