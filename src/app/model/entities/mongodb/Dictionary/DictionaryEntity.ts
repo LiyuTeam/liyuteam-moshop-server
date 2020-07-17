@@ -1,14 +1,14 @@
 import { Column , Entity , PrimaryColumn } from 'typeorm'
 import { Field , Int , ObjectType } from 'type-graphql'
-import { toolkit } from '../../../../extend/helpers/toolkit'
 import DictionaryValueEntity from './DictionaryValueEntity'
-import { IDictionaryEntity } from '../interface'
+import { CMongoEntity , IDictionaryEntity } from '../interface'
+import { snakeCase } from 'typeorm/util/StringUtils'
 
 export const SYMBOL = 'Dictionary'
 
-@Entity({ name: toolkit.Symbol2TableName(SYMBOL , 'sys') })
+@Entity({ name: `sys_${snakeCase(SYMBOL)}` })
 @ObjectType({ description: '数据字典项' })
-class DictionaryEntity extends IDictionaryEntity {
+class DictionaryEntity extends CMongoEntity implements IDictionaryEntity {
 
     @Field(type => Int , { description: '字典项类型' })
     @Column({ type: 'int' , default: 1 })

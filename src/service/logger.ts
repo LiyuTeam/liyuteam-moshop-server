@@ -1,7 +1,7 @@
-import {Application, inject, provide} from "midway"
-import {ILoggerService} from "../interface";
+import { Application , inject , provide } from 'midway'
+import { ILoggerService } from '../interface'
 
-export const SYMBOL = "LoggerService";
+export const SYMBOL = 'LoggerService'
 
 /**
  * Logger 日志服务
@@ -10,22 +10,22 @@ export const SYMBOL = "LoggerService";
 @provide(SYMBOL)
 class LoggerService implements ILoggerService {
 
-    app: Application;
-    symbol: Symbol;
+    app: Application
+    symbol: Symbol
 
-    constructor() {
+    constructor () {
         this.symbol = Symbol(SYMBOL)
     }
 
-    async init(app: Application): Promise<void> {
+    async init (app: Application): Promise<void> {
 
     }
 
     @inject()
-    readonly baseDir: string;
+    readonly baseDir: string
 
-    log() {
-        console.log(...arguments);
+    log () {
+        console.log(... arguments)
     }
 
 }

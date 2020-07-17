@@ -11,9 +11,10 @@ export default (appInfo: EggAppInfo) => ({
         password: 'liyu123456!' ,
         authSource: 'admin' ,
         database: 'zenServer' ,
-        entities: ['src/app/entities/mongodb/**/*.{ts,js}'] ,
+        entities: ['src/app/model/entities/mongodb/**/*.{ts,js}'] ,
         useNewUrlParser: true ,
-        useUnifiedTopology: true
+        useUnifiedTopology: true ,
+        synchronize: true   //  强制同步
     } as MongoConnectionOptions
     ]
 })

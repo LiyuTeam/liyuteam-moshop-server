@@ -1,32 +1,30 @@
 import { Arg , Ctx , Mutation , Query , Resolver } from 'type-graphql'
-import { Context } from 'egg'
-import { inject , provide , scope , ScopeEnum , logger } from 'midway'
+import { provide , scope , ScopeEnum , Context , Application } from 'midway'
 import { AddDictionaryInput } from '../inputer/DictionaryInputer'
 import DictionaryEntity from '../entities/mongodb/Dictionary/DictionaryEntity'
 import DictionaryValueEntity from '../entities/mongodb/Dictionary/DictionaryValueEntity'
+import { IDictionaryDao } from '../../../interface'
 
 @scope(ScopeEnum.Prototype)
-@provide()
+@provide('DictionaryResolver')
 @Resolver()
 export class DictionaryResolver {
 
-    @logger()
-    logger: any
+    dictionaryDao: IDictionaryDao
 
-    @inject()
-    ctx: Context
-
-    @inject(`DictionaryService`)
-    dictionaryService: any
-
-    @Query(() => [DictionaryEntity] ,
-        { description: '获取多个数据字典项' })
+    @Query(() => [DictionaryEntity] , { description: '获取多个数据字典项' })
     async dictionaries (
+        @Ctx() ctx: Context ,
         @Arg('mainCode' , { nullable: true }) mainCode?: string ,
         @Arg('subCode' , { nullable: true }) subCode?: string
     ) {
+        const app = ctx.app as Partial<Application>
+
+        this.dictionaryDao =
+            await app.applicationContext.getAsync('dictionaryDao')
+
         const result =
-            await this.dictionaryService.list({
+            await this.dictionaryDao.list({
                 mainCode ,
                 subCode
             } as Partial<DictionaryEntity>)
@@ -34,14 +32,12 @@ export class DictionaryResolver {
         return result as [DictionaryEntity]
     }
 
-    @Query(() => DictionaryEntity ,
-        { description: '获取单个数据字典项' })
+    @Query(() => DictionaryEntity , { description: '获取单个数据字典项' })
     async dictionary (
         @Arg('mainCode') mainCode: string ,
-        @Arg('subCode') subCode: string ,
-    ) {
+        @Arg('subCode') subCode: string) {
         const result =
-            await this.dictionaryService.get(
+            await this.dictionaryDao.get(
                 {
                     mainCode: mainCode ,
                     subCode: subCode
@@ -51,8 +47,7 @@ export class DictionaryResolver {
         return result as DictionaryEntity
     }
 
-    @Query(() => [DictionaryValueEntity] ,
-        { description: '获取单个数据项下到多个字典值' })
+    @Query(() => [DictionaryValueEntity] , { description: '获取单个数据项下到多个字典值' })
     async dictionaryValues (
         @Ctx() ctx: Context ,
         @Arg('fkDict' , {}) fkDict?: string
@@ -61,14 +56,22 @@ export class DictionaryResolver {
         return result
     }
 
-    @Mutation(() => DictionaryEntity ,
-        { description: '新增数据字典' })
+    /**
+     * 新增
+     * @param doc
+     */
+    @Mutation(() => DictionaryEntity , { description: '新增数据字典' })
     async addDictionary (
-        @Arg('data') doc: AddDictionaryInput
+        @Ctx() ctx: Context ,
+        @Arg('data' , { validate: true }) doc: AddDictionaryInput
     ) {
+        const app = ctx.app as Partial<Application>
+
+        this.dictionaryDao =
+            await app.applicationContext.getAsync('dictionaryDao')
+
         const result =
-            await this.dictionaryService.add(doc , {}) as Partial<DictionaryEntity>
+            await this.dictionaryDao.add(doc , {}) as Partial<DictionaryEntity>
         return result
     }
 }
-

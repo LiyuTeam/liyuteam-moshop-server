@@ -1,6 +1,6 @@
 import { Column , Entity , PrimaryGeneratedColumn } from 'typeorm'
-import { toolkit } from '../../../../extend/helpers/toolkit'
-import { IUserAccountEntity } from '../interface'
+import { CMongoEntity , IUserAccountEntity } from '../interface'
+import { snakeCase } from 'typeorm/util/StringUtils'
 
 export const SYMBOL = 'UserAccount'
 
@@ -8,8 +8,8 @@ export const SYMBOL = 'UserAccount'
  * UserAccount Entity
  * @description 用户账号表
  */
-@Entity({ name: toolkit.Symbol2TableName(SYMBOL , 'account') })
-class UserAccountEntity extends IUserAccountEntity {
+@Entity({ name: snakeCase(SYMBOL) })
+class UserAccountEntity extends CMongoEntity implements IUserAccountEntity {
 
     @PrimaryGeneratedColumn('uuid')
     id: string

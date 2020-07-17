@@ -1,11 +1,26 @@
-import { Column , MongoEntityManager } from 'typeorm/index'
-import { Field } from 'type-graphql'
+import { Column , MongoEntityManager , PrimaryGeneratedColumn } from 'typeorm/index'
+import { Field , Int } from 'type-graphql'
 
-export declare class IMongoEntity extends MongoEntityManager {
+export class CMongoEntity extends MongoEntityManager {
+
+    @Field({ description: 'Mongo ID' })
+    @PrimaryGeneratedColumn()
     _id: string
+
+    @Field(type => String , { description: 'uuid' })
+    @Column('uuid')
     uid: string
+
+    @Field({ description: '创建时间' })
+    @Column()
     createdAt: Date
+
+    @Field({ description: '更新时间' })
+    @Column()
     updatedAt: Date
+
+    @Field(type => Int , { description: '状态' , defaultValue: 1 })
+    @Column({ type: 'int' , default: 1 })
     status: number
 
     @Field()
@@ -16,7 +31,7 @@ export declare class IMongoEntity extends MongoEntityManager {
 /**
  * 用户账户
  */
-export declare class IUserAccountEntity extends IMongoEntity {
+export declare interface IUserAccountEntity {
     account: string
     password: string
     userName: string
@@ -28,24 +43,21 @@ export declare class IUserAccountEntity extends IMongoEntity {
 /**
  * 数据字典 - 字典项
  */
-export declare class IDictionaryEntity extends IMongoEntity {
+export declare class IDictionaryEntity {
     mainCode: string
     subCode: string
     title?: string | null
     name: string
 
     dictType: number
-    createdAt: Date
-    status: number
     uid: string
-    updatedAt: Date
 
 }
 
 /**
  * 数据字典 - 字典值项
  */
-export declare abstract class IDictionaryValuesEntity extends IMongoEntity {
+export declare abstract class IDictionaryValuesEntity {
     fkDict: any
 
     title: string | null
@@ -53,9 +65,6 @@ export declare abstract class IDictionaryValuesEntity extends IMongoEntity {
 
     valueType: number
     value?: any | null
-    createdAt: Date
-    status: number
     uid: string
-    updatedAt: Date
 
 }

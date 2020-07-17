@@ -38,15 +38,12 @@
         "src/**/*.d.ts",
         "src/config/**/*.d.ts",
         "typings/**/*.d.ts",
-        "src/@types/typings.d.ts",
-        "typings/src/index.d.ts"
+        "typings/src/index.d.ts",
+        "src/**/interface.ts"
     ],
     "paths": {
         "~/*": [
             "./*"
-        ],
-        "@@/*": [
-            "./src/app/*"
         ],
         "@/*": [
             "./src/*"
