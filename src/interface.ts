@@ -90,7 +90,7 @@ export interface ILoggerService extends IBaseService {
 export declare interface IDictionaryDao extends IModelService {
 }
 
-export interface ITypeormService extends IBaseService {
+export declare interface ITypeormService extends IBaseService {
 
     /**
      * 获得仓库

@@ -1,7 +1,7 @@
-import { Column , MongoEntityManager , PrimaryGeneratedColumn } from 'typeorm/index'
+import { Column , PrimaryGeneratedColumn } from 'typeorm/index'
 import { Field , Int } from 'type-graphql'
 
-export class CMongoEntity extends MongoEntityManager {
+export class CMongoEntity {
 
     @Field({ description: 'Mongo ID' })
     @PrimaryGeneratedColumn()

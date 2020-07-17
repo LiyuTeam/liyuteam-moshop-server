@@ -12,6 +12,9 @@ import {
 
 export const SYMBOL = 'TypeormService'
 
+/**
+ * Typeorm 服务
+ */
 @provide(SYMBOL)
 class TypeormService implements ITypeormService {
 
@@ -38,7 +41,6 @@ class TypeormService implements ITypeormService {
             }))
         })
     }
-
 
     /**
      * 获取 Repo

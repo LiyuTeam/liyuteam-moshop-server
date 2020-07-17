@@ -4,6 +4,7 @@
     "description": "ykfe",
     "dependencies": {
         "apollo-server-koa": "^2.15.1",
+        "class-validator": "^0.12.2",
         "dataloader": "^2.0.0",
         "egg-scripts": "^2.10.0",
         "graphql": "^15.3.0",

@@ -3,6 +3,7 @@ import { Field , Int , ObjectType } from 'type-graphql'
 import DictionaryValueEntity from './DictionaryValueEntity'
 import { CMongoEntity , IDictionaryEntity } from '../interface'
 import { snakeCase } from 'typeorm/util/StringUtils'
+import { Min } from 'class-validator'
 
 export const SYMBOL = 'Dictionary'
 
@@ -15,11 +16,13 @@ class DictionaryEntity extends CMongoEntity implements IDictionaryEntity {
     dictType: number
 
     @Field(type => String , { description: '字典项主Code' })
-    @PrimaryColumn()
+    @PrimaryColumn({ nullable: false })
+    @Min(2)
     mainCode: string
 
-    @Field({ description: '字典项从Code' })
-    @PrimaryColumn()
+    @Field({ description: '字典项从Code' , nullable: false })
+    @PrimaryColumn({ nullable: false })
+    @Min(2)
     subCode: string
 
     @Field({ description: '字典项名' })
@@ -32,7 +35,7 @@ class DictionaryEntity extends CMongoEntity implements IDictionaryEntity {
 
     @Field(type => [DictionaryValueEntity] , { description: '字典项值' , nullable: true })
     @Column()
-    dictValues: [DictionaryValueEntity]
+    dictValues?: [DictionaryValueEntity]
 }
 
 export default DictionaryEntity

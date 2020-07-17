@@ -1,5 +1,6 @@
 import { IDictionaryDao , ITypeormService , MidwayApplication } from '../../../interface'
-import { provide , inject } from 'midway'
+import { provide , inject , logger } from 'midway'
+// import DictionaryEntity from '../entities/mongodb/Dictionary/DictionaryEntity'
 
 /**
  * DictionaryDAO
@@ -15,13 +16,23 @@ export class DictionaryDao implements IDictionaryDao {
     @inject('TypeormService')
     typeormService: ITypeormService
 
+    @logger('appLogger')
+    logger: any
+
+    /**
+     * 增加数据字典项
+     * @param doc
+     * @param props
+     */
     async add (doc: any , props: any) {
         let dictionaryRepo =
             await this.typeormService.getRepo(
                 'sys_dictionary' , 'mongodb' , true
             )
+        // addDoc = new DictionaryEntity(doc)
 
-        const result = await dictionaryRepo.create(doc)
+        let result = await dictionaryRepo.save(doc)
+        this.logger.debug('DictionaryDao created is ok,' , result)
         return result
     }
 

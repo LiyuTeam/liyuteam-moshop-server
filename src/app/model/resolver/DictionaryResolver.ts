@@ -58,6 +58,7 @@ export class DictionaryResolver {
 
     /**
      * 新增
+     * @param ctx
      * @param doc
      */
     @Mutation(() => DictionaryEntity , { description: '新增数据字典' })
