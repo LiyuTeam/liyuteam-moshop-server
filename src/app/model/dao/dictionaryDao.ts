@@ -1,5 +1,7 @@
-import { IDictionaryDao , ITypeormService , MidwayApplication } from '../../../interface'
-import { provide , inject , logger } from 'midway'
+import { IDictionaryDao, ITypeormService, MidwayApplication } from '../../../interface'
+import { provide, inject, logger } from 'midway'
+// import DictionaryEntity from '../entities/mongodb/Dictionary/DictionaryEntity'
+
 // import DictionaryEntity from '../entities/mongodb/Dictionary/DictionaryEntity'
 
 /**
@@ -24,42 +26,41 @@ export class DictionaryDao implements IDictionaryDao {
      * @param doc
      * @param props
      */
-    async add (doc: any , props: any) {
-        let dictionaryRepo =
-            await this.typeormService.getRepo(
-                'sys_dictionary' , 'mongodb' , true
-            )
-        // addDoc = new DictionaryEntity(doc)
+    async add(doc: any, props: any) {
+        let dictionaryRepo = await this.typeormService.getRepo(
+            'sys_dictionary', 'mongodb', true
+        );
+        // addDoc = Object.assign(new DictionaryEntity(), doc)
 
-        let result = await dictionaryRepo.save(doc)
-        this.logger.debug('DictionaryDao created is ok,' , result)
+        let result = await dictionaryRepo.create(doc)
+        this.logger.debug('DictionaryDao created is ok,', result)
         return result
     }
 
-    del (where: any , delTruly: boolean): Promise<any> | void {
+    del(where: any, delTruly: boolean): Promise<any> | void {
         return undefined
     }
 
-    get (where: any): Promise<any> | void {
+    get(where: any): Promise<any> | void {
         return undefined
     }
 
-    async list (where: any) {
+    async list(where: any) {
 
         let dictionaryRepo =
             await this.typeormService.getRepo(
-                'sys_dictionary' , 'mongodb' , true
+                'sys_dictionary', 'mongodb', true
             )
 
         const result = await dictionaryRepo.find()
         return result
     }
 
-    modify (where: any , doc: any): Promise<any> | void {
+    modify(where: any, doc: any): Promise<any> | void {
         return undefined
     }
 
-    async init (app: MidwayApplication): Promise<void> {
+    async init(app: MidwayApplication): Promise<void> {
         this.app = app
     }
 

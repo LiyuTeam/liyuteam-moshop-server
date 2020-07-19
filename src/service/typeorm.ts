@@ -1,12 +1,12 @@
-import { Application , config , provide , logger } from 'midway'
+import { Application, config, provide, logger } from 'midway'
 import { ITypeormService } from '../interface'
 import {
-    Connection , ConnectionOptions ,
-    createConnection ,
-    EntitySchema ,
-    getMongoRepository ,
-    getRepository ,
-    ObjectType ,
+    Connection, ConnectionOptions,
+    createConnection,
+    EntitySchema,
+    getMongoRepository,
+    getRepository,
+    ObjectType,
     Repository
 } from 'typeorm/index'
 
@@ -21,7 +21,7 @@ class TypeormService implements ITypeormService {
     app: Application
     symbol: Symbol
 
-    @logger('logger')
+    @logger('appLogger')
     logger: any
     /**
      * 数据库配置
@@ -29,13 +29,13 @@ class TypeormService implements ITypeormService {
      */
     @config('database')
     dbConfig: { clients: ConnectionOptions[] }
-    connections = new Map() as Map<string , Connection>
+    connections = new Map() as Map<string, Connection>
 
-    async init (app: Application): Promise<void> {
+    async init(app: Application): Promise<void> {
         this.app = app
 
         this.dbConfig.clients.map(async c => {
-            this.connections.set(c.name as string , await createConnection(c).then(res => {
+            this.connections.set(c.name as string, await createConnection(c).then(res => {
                 this.logger.log(`Create connection [${c.name}], connect type is ${c.type}`)
                 return res
             }))
@@ -48,11 +48,11 @@ class TypeormService implements ITypeormService {
      * @param connectName
      * @param isMongo
      */
-    async getRepo (entity: ObjectType<EntitySchema> , connectName = 'default' , isMongo = false): Promise<Repository<any>> {
+    async getRepo(entity: ObjectType<EntitySchema>, connectName = 'default', isMongo = false): Promise<Repository<any>> {
         if (isMongo) {
-            return getMongoRepository(entity , connectName)
+            return getMongoRepository(entity, connectName)
         }
-        return getRepository(entity , connectName)
+        return getRepository(entity, connectName)
     }
 
     /**
@@ -60,8 +60,8 @@ class TypeormService implements ITypeormService {
      * @param entity
      * @param connectName
      */
-    async getMongoRepo (entity: ObjectType<EntitySchema> , connectName = 'default') {
-        return this.getRepo(entity , connectName , true)
+    async getMongoRepo(entity: ObjectType<EntitySchema>, connectName = 'default') {
+        return this.getRepo(entity, connectName, true)
     }
 
 }

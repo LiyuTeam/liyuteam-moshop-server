@@ -1,7 +1,7 @@
-import { EggAppConfig , EggAppInfo , PowerPartial } from 'midway'
+import { EggAppConfig, EggAppInfo, PowerPartial } from 'midway'
 import GraphqlConfig from './public/config.graphql'
 import DataBaseConfig from './public/config.database'
-
+import LoggerConfig from './public/config.logger';
 const path = require('path')
 export type DefaultConfig = PowerPartial<EggAppConfig>
 
@@ -20,8 +20,10 @@ export default (appInfo: MyEggAppInfo) => {
     config.graphql = GraphqlConfig(appInfo)
     config.database = DataBaseConfig(appInfo)
     config.typeGraphQL = GraphqlConfig(appInfo)
+    config.customLogger = LoggerConfig(appInfo).customLogger
+
     config.static = {
-        dir: [path.join(appInfo.appDir , '/output') , path.join(appInfo.appDir , '/src/app/public')] ,
+        dir: [path.join(appInfo.appDir, '/output'), path.join(appInfo.appDir, '/src/app/public')],
         prefix: '/'
     }
 

@@ -1,10 +1,10 @@
 import { join as pathJoin } from 'path'
 
-module.exports = (appInfo: { root: string }) => {
+export default (appInfo: { root: string }) => {
     return {
-        customLoader: {
+        customLogger: {
             appLogger: {
-                file: pathJoin(appInfo.root , 'logs/app.log')
+                file: pathJoin(appInfo.root, 'logs/app.log')
             }
         }
     }
