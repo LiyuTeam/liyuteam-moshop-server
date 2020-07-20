@@ -10,7 +10,7 @@ import {
     Repository
 } from 'typeorm/index'
 
-export const SYMBOL = 'TypeormService'
+export const SYMBOL = 'typeormService'
 
 /**
  * Typeorm 服务

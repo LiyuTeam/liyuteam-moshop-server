@@ -2,6 +2,7 @@ import { Application } from 'midway'
 import { Repository } from 'typeorm/index'
 import ModelTypings from '../typings/src/index'
 
+// --- 案例代码 ---
 export interface IApiResult {
     news: NewsItem[]
 }
@@ -15,10 +16,17 @@ interface NewsItem {
     title: string
 }
 
+// --- 案例代码 ---
+
+/**
+ * Midway 别名
+ * @description 用于某些场景下追踪MidwayApplication声明
+ */
 export type MidwayApplication = Application
 
 /**
- * Base-Service interface
+ * Base-Service Interface
+ * @description 基础服务接口
  */
 export interface IBaseService {
     app: Application
@@ -28,6 +36,10 @@ export interface IBaseService {
 
 }
 
+/**
+ * IModel Interface
+ * @description model服务接口
+ */
 export interface IModelService extends IBaseService {
     /**
      * add action
@@ -85,10 +97,15 @@ export interface ILoggerService extends IBaseService {
 }
 
 /**
- * Dictionary-Service abstractions
+ * Dictionary - service interface
  */
 export declare interface IDictionaryDao extends IModelService {
 }
+
+/**
+ * IBaseDao - base dao interface
+ */
+export declare interface IBaseDao extends IModelService {}
 
 export declare interface ITypeormService extends IBaseService {
 

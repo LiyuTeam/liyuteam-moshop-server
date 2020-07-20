@@ -1,13 +1,12 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
-import { Field, Int, ObjectType } from 'type-graphql'
+import { Column , CreateDateColumn , Entity , PrimaryColumn , PrimaryGeneratedColumn , UpdateDateColumn } from 'typeorm'
+import { Field , Int , ObjectType } from 'type-graphql'
 import DictionaryValueEntity from './DictionaryValueEntity'
 import { IDictionaryEntity } from '../interface'
-import { snakeCase } from 'typeorm/util/StringUtils'
 import { Min } from 'class-validator'
 
-export const SYMBOL = 'Dictionary'
+export const SYMBOL = 'dictionaryEntity'
 
-@Entity({ name: `sys_${snakeCase(SYMBOL)}` })
+@Entity({ name: SYMBOL })
 @ObjectType({ description: '数据字典项' })
 class DictionaryEntity implements IDictionaryEntity {
 

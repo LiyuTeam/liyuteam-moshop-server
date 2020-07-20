@@ -9,6 +9,7 @@
         "egg-scripts": "^2.10.0",
         "graphql": "^15.3.0",
         "graphql-query-complexity": "^0.6.0",
+        "graphql-relay": "^0.6.0",
         "midway": "^1.0.0",
         "mongodb": "^3.5.9",
         "react": "^16.10.2",

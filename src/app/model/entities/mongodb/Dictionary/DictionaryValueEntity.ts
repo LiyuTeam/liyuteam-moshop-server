@@ -1,12 +1,11 @@
 import { Column , Entity , ManyToOne } from 'typeorm'
-import DictionaryEntity from './DictionaryEntity'
 import { Field , Int , ObjectType } from 'type-graphql'
 import { CMongoEntity , IDictionaryValuesEntity } from '../interface'
-import { snakeCase } from 'typeorm/util/StringUtils'
+import DictionaryEntity from './DictionaryEntity'
 
-export const SYMBOL = 'DictionaryValue'
+export const SYMBOL = 'dictionaryValueEntity'
 
-@Entity({ name: `sys_${snakeCase(SYMBOL)}` })
+@Entity({ name: SYMBOL })
 @ObjectType(SYMBOL , { description: '字典值' })
 class DictionaryValueEntity extends CMongoEntity implements IDictionaryValuesEntity {
     @Field(type => DictionaryEntity)

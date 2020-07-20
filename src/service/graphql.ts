@@ -1,10 +1,10 @@
 import {
-    Application,
-    provide,
-    inject,
-    config,
-    ScopeEnum,
-    scope,
+    Application ,
+    provide ,
+    inject ,
+    config ,
+    ScopeEnum ,
+    scope ,
     logger
 } from 'midway'
 import { GraphQLSchema } from 'graphql'
@@ -43,33 +43,34 @@ class GraphqlService implements IGraphqlService {
     public apolloServer: ApolloServer
     public graphqlSchema: GraphQLSchema
 
-    getResolvers(): [string] {
+    getResolvers (): [string] {
         const isLocal = this.env === 'local'
-        return [path.resolve(this.appDir, `/model/**/*.${isLocal ? 'ts' : 'js'}`)]
+        return [path.resolve(this.appDir , `/model/**/*.${isLocal ? 'ts' : 'js'}`)]
     }
 
     /**
      * 启动 Graphql 服务
      * @param app Application
      */
-    async init(app: Application) {
+    async init (app: Application) {
         this.app = app
 
         try {
             this.graphqlSchema = await buildSchema({
-                nullableByDefault: true,
-                resolvers: this.getResolvers(),
-                dateScalarMode: 'timestamp',
+                nullableByDefault: true ,
+                resolvers: this.getResolvers() ,
+                dateScalarMode: 'timestamp' ,
+                container: app.applicationContext ,
                 // automatically create `schema.gql` file with schema definition in project's working directory
                 emitSchemaFile: {
                     // path: 'app/../schema.gql',
                     path: path.join(
-                        this.appDir,
-                        'public',
-                        'graphql',
+                        this.appDir ,
+                        'public' ,
+                        'graphql' ,
                         'AllSchema.graphql'
-                    ),
-                    commentDescriptions: true,
+                    ) ,
+                    commentDescriptions: true ,
                     sortedSchema: false // by default the printed schema is sorted alphabetically
                 }
             })
@@ -78,29 +79,29 @@ class GraphqlService implements IGraphqlService {
         }
 
         this.apolloServer = new ApolloServer({
-            schema: this.graphqlSchema,
-            tracing: true,
-            context: ({ ctx }) => ctx, // 将 egg 的 context 作为 Resolver 传递的上下文
+            schema: this.graphqlSchema ,
+            tracing: true ,
+            context: ({ ctx }) => ctx , // 将 egg 的 context 作为 Resolver 传递的上下文
             playground: {
                 settings: {
                     'request.credentials': 'include'
                 }
-            } as any,
+            } as any ,
             introspection: true
         })
 
         this.apolloServer.applyMiddleware({
-            app: app.createAnonymousContext().app,
-            path: this.config.router,
+            app: app.createAnonymousContext().app ,
+            path: this.config.router ,
             cors: true
         })
 
-        console.info('graphql server init', this.config.router, 7001)
+        console.info('graphql server init' , this.config.router , 7001)
     }
 
     // async query({query, var})
 
-    get schema(): GraphQLSchema {
+    get schema (): GraphQLSchema {
         return this.graphqlSchema
     }
 
