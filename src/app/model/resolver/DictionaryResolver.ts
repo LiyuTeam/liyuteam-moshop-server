@@ -1,16 +1,17 @@
 import { Arg , Ctx , Mutation , Query , Resolver } from 'type-graphql'
 import { Context , inject , provide , scope , ScopeEnum } from 'midway'
 import { AddDictionaryInput } from '../inputer/DictionaryInputer'
+import { IDictionaryDao } from '../../../interface'
+import { IDictionaryEntity } from '../entities/mongodb/interface'
 import DictionaryEntity from '../entities/mongodb/Dictionary/DictionaryEntity'
 import DictionaryValueEntity from '../entities/mongodb/Dictionary/DictionaryValueEntity'
-import { IDictionaryDao } from '../../../interface'
 
 @scope(ScopeEnum.Prototype)
 @provide('dictionaryResolver')
 @Resolver()
 export class DictionaryResolver {
 
-    @inject('dictionaryDao')
+    @inject('DictionaryDao')
     dictionaryDao: IDictionaryDao
 
     /**
@@ -33,7 +34,7 @@ export class DictionaryResolver {
 
         ctx.logger.debug('Dictionary has listed' , result)
 
-        return result as [DictionaryEntity]
+        return result
     }
 
     /**
@@ -50,10 +51,10 @@ export class DictionaryResolver {
                 {
                     mainCode: mainCode ,
                     subCode: subCode
-                } as Partial<DictionaryEntity>
+                } as Partial<IDictionaryEntity>
             )
 
-        return result as DictionaryEntity
+        return result
     }
 
     @Query(() => [DictionaryValueEntity] , { description: '获取单个数据项下到多个字典值' })
@@ -82,6 +83,6 @@ export class DictionaryResolver {
 
         ctx.logger.info('Dictionary has created' , result)
 
-        return result
+        return result as DictionaryEntity
     }
 }
