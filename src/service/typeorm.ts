@@ -1,12 +1,13 @@
-import { Application, config, provide, logger } from 'midway'
+import { Application , config , logger , provide } from 'midway'
 import { ITypeormService } from '../interface'
 import {
-    Connection, ConnectionOptions,
-    createConnection,
-    EntitySchema,
-    getMongoRepository,
-    getRepository,
-    ObjectType,
+    Connection ,
+    ConnectionOptions ,
+    createConnection ,
+    EntitySchema ,
+    getMongoRepository ,
+    getRepository ,
+    ObjectType ,
     Repository
 } from 'typeorm/index'
 
@@ -48,7 +49,7 @@ class TypeormService implements ITypeormService {
      * @param connectName
      * @param isMongo
      */
-    async getRepo(entity: ObjectType<EntitySchema>, connectName = 'default', isMongo = false): Promise<Repository<any>> {
+    async getRepo (entity: ObjectType<EntitySchema>, connectName = 'default', isMongo = false): Promise<Repository<any>> {
         if (isMongo) {
             return getMongoRepository(entity, connectName)
         }
@@ -60,7 +61,7 @@ class TypeormService implements ITypeormService {
      * @param entity
      * @param connectName
      */
-    async getMongoRepo(entity: ObjectType<EntitySchema>, connectName = 'default') {
+    async getMongoRepo (entity: ObjectType<EntitySchema>, connectName = 'default') {
         return this.getRepo(entity, connectName, true)
     }
 

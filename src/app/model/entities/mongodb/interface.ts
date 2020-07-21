@@ -31,13 +31,19 @@ export class CMongoEntity {
 /**
  * 用户账户
  */
-export declare interface IUserAccountEntity {
+export declare class IUserAccountEntity implements CMongoEntity{
     account: string
     password: string
     userName: string
     isAdmin: number
     secretToken: string
     phone: number
+    _id: string
+    comment: string
+    createdAt: Date
+    status: number
+    uid: string
+    updatedAt: Date
 }
 
 /**
@@ -63,7 +69,7 @@ export declare class IDictionaryEntity implements CMongoEntity {
 /**
  * 数据字典 - 字典值项
  */
-export declare class IDictionaryValuesEntity {
+export declare class IDictionaryValuesEntity implements CMongoEntity{
     fkDict: any
 
     title: string | null
@@ -72,5 +78,10 @@ export declare class IDictionaryValuesEntity {
     valueType: number
     value?: any | null
     uid: string
+    _id: string
+    comment: string
+    createdAt: Date
+    status: number
+    updatedAt: Date
 
 }

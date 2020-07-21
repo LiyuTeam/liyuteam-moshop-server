@@ -3,10 +3,12 @@ import { Field , Int , ObjectType } from 'type-graphql'
 import DictionaryValueEntity from './DictionaryValueEntity'
 import { IDictionaryEntity } from '../interface'
 import { Min } from 'class-validator'
+import { provide } from 'midway'
 
-export const SYMBOL = 'dictionaryEntity'
+export const SYMBOL = 'DictionaryEntity'
 
 @Entity({ name: SYMBOL })
+@provide(SYMBOL)
 @ObjectType({ description: '数据字典项' })
 class DictionaryEntity implements IDictionaryEntity {
 

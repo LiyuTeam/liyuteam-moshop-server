@@ -1,17 +1,21 @@
 import { IDictionaryDao , MidwayApplication } from '../../../interface'
-import { provide } from 'midway'
+import { inject , provide } from 'midway'
 import { BaseDao } from './baseDao'
+import { IDictionaryEntity } from '../entities/mongodb/interface'
 
 /**
  * DictionaryDAO
  * 数据字典服务
  * @description 提供数据字典服务和功能
  */
-@provide('dictionaryDao')
+@provide('DictionaryDao')
 export class DictionaryDao extends BaseDao implements IDictionaryDao {
 
     app: MidwayApplication
     symbol: Symbol
+
+    @inject('DictionaryEntity')
+    dictionaryEntity: IDictionaryEntity
 
     /**
      * 增加数据字典项
@@ -20,10 +24,12 @@ export class DictionaryDao extends BaseDao implements IDictionaryDao {
      */
     async add (doc: any , props: any) {
         let dictionaryRepo = await this.typeormService.getRepo(
-            'sys_dictionary' , 'mongodb' , true
+            'DictionaryEntity' , 'mongodb' , true
         )
 
-        let result = await dictionaryRepo.create(doc)
+        let result = await dictionaryRepo.create(
+            Object.assign({} , this.dictionaryEntity , doc))
+
         this.logger.debug('DictionaryDao created is ok,' , result)
         return result
     }
@@ -40,7 +46,7 @@ export class DictionaryDao extends BaseDao implements IDictionaryDao {
 
         let dictionaryRepo =
             await this.typeormService.getRepo(
-                'sys_dictionary' , 'mongodb' , true
+                'DictionaryEntity' , 'mongodb' , true
             )
 
         const result = await dictionaryRepo.find()
