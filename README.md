@@ -1,12 +1,44 @@
 # MoShop - Server
 MoShop服务端
+当前版本`v0.0.2`
+
+本系统应用于通过快速配置生成小程序代码,并进行发布迭代;
+
+> 目录
+>
+> [功能开发](#功能开发)
 
 
-# Egg + React + SSR 应用骨架
+## <span id="功能开发">功能开发</span>
+
+> 进行
+- [ ] TypeOrm集成
+
+> 计划
+- [ ] 小程序对接模块 - moapp 开发
+- [ ] 业务模块 - cms 开发
+- [ ] MongoDB,PgSql集成
+- [ ] Redis集成
+- [ ] CI自动打包,Docker自动化发布
+
+> 完成
+
+`2020-07-13` - `v0.0.2`
+- [x] Egg TsHelper集成
+- [x] Graphql,TypeGraphql,ApolloServer集成
+
+`2020-07-03` - `v0.0.1`
+- [x] 框架初始化,部署初始化
+
+## 底层框架 - midway
+
+感谢midway以及ykfe提供到底层脚手架;
+
+### Egg + React + SSR 应用骨架
 
 详细用法实现请查看[官方文档](http://ykfe.surge.sh)
 
-# 功能/特性
+### 功能/特性
 
 - [x] 基于 cra 脚手架开发，由 cra 开发的 React App 可无缝迁移，如果你熟悉 cra 的配置，上手成本几乎为 0
 - [x] 小而美，相比于 beidou，next.js 这样的高度封装方案，我们的实现原理和开发模式一目了然

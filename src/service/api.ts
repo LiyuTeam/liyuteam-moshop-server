@@ -9,7 +9,7 @@ export class ApiService implements IApiService {
       news: [
         {
           id: '1',
-          title: 'Racket v7.3 Release Notes'
+              title: 'Racket v7.3 Release Notes'
         },
         {
           id: '2',

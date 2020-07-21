@@ -1,0 +1,13 @@
+{
+    "watchDirs": {
+        "typings": {
+            "watch": "register",
+            "interface": "Typings",
+            "directory": "src",
+            "enabled": true,
+            "typings": "{cwd}",
+            "generator": "auto",
+            "interfaceHandle": "InstanceType<{{0}}>"
+        }
+    }
+}
