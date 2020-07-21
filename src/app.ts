@@ -15,11 +15,11 @@ class AppBoot implements IBoot {
         const { app } = this
         app.logger.info('Application Started!!')
 
-        const typeormService = await app.applicationContext.getAsync('TypeormService')
+        const typeormService = await app.applicationContext.getAsync('typeormService')
         await typeormService.init(app)
         app.logger.info(`TypeormService is ok , there are connection ${Object.keys(typeormService.connections).length} db created`)
 
-        const graphqlService = await app.applicationContext.getAsync('GraphqlService')
+        const graphqlService = await app.applicationContext.getAsync('graphqlService')
         await graphqlService.init(app)
         app.logger.info('GraphqlService is ok , listen http://localhost:7001/graphql')
     }

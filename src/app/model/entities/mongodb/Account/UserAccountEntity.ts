@@ -1,13 +1,15 @@
 import { Column , Entity , PrimaryGeneratedColumn } from 'typeorm'
 import { CMongoEntity , IUserAccountEntity } from '../interface'
 import { snakeCase } from 'typeorm/util/StringUtils'
+import { provide } from 'midway'
 
-export const SYMBOL = 'UserAccount'
+export const SYMBOL = 'UserAccountEntity'
 
 /**
  * UserAccount Entity
  * @description 用户账号表
  */
+@provide(SYMBOL)
 @Entity({ name: snakeCase(SYMBOL) })
 class UserAccountEntity extends CMongoEntity implements IUserAccountEntity {
 

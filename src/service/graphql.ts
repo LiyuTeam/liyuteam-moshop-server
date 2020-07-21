@@ -19,7 +19,7 @@ import { IGraphqlService } from '../interface'
  * @description 用于扫描 app/graphql/schema中到***Resolve.ts 生成graphqlSchema Json
  */
 @scope(ScopeEnum.Singleton)
-@provide('GraphqlService')
+@provide('graphqlService')
 class GraphqlService implements IGraphqlService {
 
     app: Application
