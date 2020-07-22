@@ -23,14 +23,19 @@ export class DictionaryDao extends BaseDao implements IDictionaryDao {
      * @param props
      */
     async add (doc: any , props: any) {
-        let dictionaryRepo = await this.typeormService.getRepo(
-            'DictionaryEntity' , 'mongodb' , true
-        )
 
-        let result = await dictionaryRepo.create(
-            Object.assign({} , this.dictionaryEntity , doc))
+        const
+            me = this ,
+            dictionaryRepo = await this.typeormService
+                .getRepo('DictionaryEntity' , 'mongodb' , true
+                ) ,
+            result = await dictionaryRepo
+                .save(doc)
+                .then(res => {
+                    me.logger.debug('DictionaryDao created is ok,' , res)
+                    return res
+                })
 
-        this.logger.debug('DictionaryDao created is ok,' , result)
         return result
     }
 

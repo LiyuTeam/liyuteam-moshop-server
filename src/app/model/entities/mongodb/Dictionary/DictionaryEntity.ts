@@ -4,6 +4,7 @@ import DictionaryValueEntity from './DictionaryValueEntity'
 import { IDictionaryEntity } from '../interface'
 import { Min } from 'class-validator'
 import { provide } from 'midway'
+import { ObjectIdColumn } from 'typeorm/index'
 
 export const SYMBOL = 'DictionaryEntity'
 
@@ -12,7 +13,7 @@ export const SYMBOL = 'DictionaryEntity'
 @ObjectType({ description: '数据字典项' })
 class DictionaryEntity implements IDictionaryEntity {
 
-    @Field() @PrimaryGeneratedColumn()
+    @Field() @ObjectIdColumn()
     _id: string
 
     @Field() @CreateDateColumn()

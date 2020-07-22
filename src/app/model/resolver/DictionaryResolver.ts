@@ -83,6 +83,6 @@ export class DictionaryResolver {
 
         ctx.logger.info('Dictionary has created' , result)
 
-        return result
+        return result as DictionaryEntity
     }
 }
