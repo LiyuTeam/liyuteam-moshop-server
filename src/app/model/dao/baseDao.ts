@@ -1,4 +1,4 @@
-import { IBaseDao , ITypeormService , MidwayApplication } from '../../../interface'
+import { ITypeormService , MidwayApplication } from '../../../interface'
 import { inject , logger } from 'midway'
 
 export declare type BaseDaoProps = {
@@ -8,7 +8,7 @@ export declare type BaseDaoProps = {
 /**
  * BaseDao 基础dao底层
  */
-export class BaseDao implements IBaseDao {
+export class BaseDao {
 
     app: MidwayApplication
     symbol: Symbol
@@ -19,29 +19,4 @@ export class BaseDao implements IBaseDao {
 
     @logger('appLogger')
     logger: any
-
-    init (app: MidwayApplication): Promise<void> {
-        return Promise.resolve(undefined)
-    }
-
-    add (doc: any , props?: any): Promise<any> | void {
-        return undefined
-    }
-
-    del (where: any , delTruly?: boolean): Promise<any> | void {
-        return undefined
-    }
-
-    get (where: any): Promise<any> | void {
-        return undefined
-    }
-
-    list (where: any): Promise<any> | void {
-        return undefined
-    }
-
-    modify (where: any , doc: any): Promise<any> | void {
-        return undefined
-    }
-
 }

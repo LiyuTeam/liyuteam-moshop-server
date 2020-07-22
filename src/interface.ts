@@ -117,3 +117,8 @@ export declare interface ITypeormService extends IBaseService {
     getRepo (entity: any , connectName: string , isMongo: boolean): Promise<Repository<any>>
 
 }
+
+
+export declare interface IUserAccountDao extends IModelService {
+
+}

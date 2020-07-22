@@ -26,12 +26,13 @@ export class CMongoEntity {
     @Field()
     @Column({ comment: '备注', nullable: true })
     comment: string
+
 }
 
 /**
  * 用户账户
  */
-export declare class IUserAccountEntity implements CMongoEntity{
+export declare class IUserAccountEntity implements CMongoEntity {
     account: string
     password: string
     userName: string
