@@ -7,6 +7,7 @@ import {
     EntitySchema ,
     getMongoRepository ,
     getRepository ,
+    MongoRepository ,
     ObjectType ,
     Repository
 } from 'typeorm/index'
@@ -61,8 +62,8 @@ class TypeormService implements ITypeormService {
      * @param entity
      * @param connectName
      */
-    async getMongoRepo (entity: ObjectType<EntitySchema>, connectName = 'default') {
-        return this.getRepo(entity, connectName, true)
+    async getMongoRepo (entity: ObjectType<EntitySchema> , connectName = 'default'): Promise<MongoRepository<any>> {
+        return this.getRepo(entity , connectName , true) as any
     }
 
 }

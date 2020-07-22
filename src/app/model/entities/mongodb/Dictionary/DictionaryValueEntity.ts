@@ -2,10 +2,12 @@ import { Column , Entity , ManyToOne } from 'typeorm'
 import { Field , Int , ObjectType } from 'type-graphql'
 import { CMongoEntity , IDictionaryValuesEntity } from '../interface'
 import DictionaryEntity from './DictionaryEntity'
+import { provide } from 'midway'
 
 export const SYMBOL = 'DictionaryValueEntity'
 
 @Entity({ name: SYMBOL })
+@provide(SYMBOL)
 @ObjectType(SYMBOL , { description: '字典值' })
 class DictionaryValueEntity extends CMongoEntity implements IDictionaryValuesEntity {
     @Field(type => DictionaryEntity)

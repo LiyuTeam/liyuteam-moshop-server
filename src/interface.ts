@@ -1,5 +1,5 @@
 import { Application } from 'midway'
-import { Repository } from 'typeorm/index'
+import { MongoRepository , Repository } from 'typeorm/index'
 import ModelTypings from '../typings/src/index'
 
 // --- 案例代码 ---
@@ -102,6 +102,7 @@ export interface ILoggerService extends IBaseService {
 export declare interface IDictionaryDao extends IModelService {
 }
 
+
 /**
  * IBaseDao - base dao interface
  */
@@ -115,5 +116,7 @@ export declare interface ITypeormService extends IBaseService {
      * @param isMongo
      */
     getRepo (entity: any , connectName: string , isMongo: boolean): Promise<Repository<any>>
+
+    getMongoRepo (entity: any , connectName: string): Promise<MongoRepository<any>>
 
 }
