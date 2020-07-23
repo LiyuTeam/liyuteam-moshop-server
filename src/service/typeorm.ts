@@ -63,7 +63,7 @@ class TypeormService implements ITypeormService {
      * @param connectName
      */
     async getMongoRepo (entity: ObjectType<EntitySchema> , connectName = 'default'): Promise<MongoRepository<any>> {
-        return this.getRepo(entity , connectName , true) as any
+        return await this.getRepo(entity , connectName , true) as any
     }
 
 }

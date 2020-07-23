@@ -12,6 +12,12 @@
             true,
             "always"
         ],
-        "one-variable-per-declaration": false
+        "one-variable-per-declaration": false,
+        "import/extensions": [
+            "error",
+            "always",
+            {
+                "ts": "never"
+            }]
     }
 }

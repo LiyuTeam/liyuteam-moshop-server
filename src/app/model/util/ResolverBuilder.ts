@@ -1,47 +1,85 @@
-import { Arg , ClassType , Ctx , Int , Mutation , Query , Resolver } from 'type-graphql'
-import { Context } from 'vm'
+import { Arg , ClassType , InputType , Int , Mutation , Query , Resolver } from 'type-graphql'
 import { inject } from 'midway'
 import { IBaseDao } from './DaoBuilder'
-import { InputType } from 'zlib'
-import { IBaseInput } from './InputBuilder'
 
 export declare interface IResolver {
     add: any
+    get: any
+    modify: any
+    del: any
     list: any
+
 }
 
 /**
- * 创造解析器
+ * ResolverBuilder
+ * @param suffix 前缀 实体 suffix+'Entity',数据操作 suffix + 'Dao',突变名 [add|list|del|modify|get] + suffix
+ * @param objectTypeCls 抽象实体对象 用于描述返回结果的实体
+ * @param inputTypeCls 抽象输入器 用于描述接口允许输入的字段,会被内置继承为ResolverInnerInputType实现
+ * @description 解析器创造器
  */
-export const createResolver = <T extends ClassType , I extends InputType> (
+export function resolverBuilder<T extends ClassType> (
     suffix: string ,
     objectTypeCls: T ,
-    inputTypeCls: IBaseInput
-): any => {
+    inputTypeCls: T
+): any {
+
+    /**
+     * 内建输入器
+     */
+    @InputType()
+    class ResolverInnerInputType extends inputTypeCls {
+    }
+
     @Resolver({ isAbstract: true })
     abstract class ABCBaseResolver implements IResolver {
         protected items: T[] = []
 
         @inject(`${suffix}Dao`)
         dao: IBaseDao
-        @inject(`${suffix}Input`)
-        input: IBaseInput
 
+        /**
+         * list 查询列表
+         * @param first
+         */
         @Query(type => [objectTypeCls] , { name: `list${suffix}` })
         async list (
-            @Ctx() ctx: Context ,
             @Arg('first' , type => Int) first: number
         ) {
-            return this.items.slice(0 , first)
+            return this.dao.list({})
         }
 
+        /**
+         * add 增加一个
+         * @param doc
+         */
         @Mutation(type => objectTypeCls , { name: `add${suffix}` })
         async add (
-            @Ctx() ctx: Context ,
-            @Arg('data' , { validate: true }) doc: typeof inputTypeCls
+            @Arg('data' , { validate: true }) doc: ResolverInnerInputType
         ) {
             return this.dao.add(doc)
         }
+
+        /**
+         * get 查询一个
+         * @param where
+         */
+        @Mutation(type => objectTypeCls , { name: `get${suffix}` })
+        async get (
+            @Arg('where' , { validate: true }) where: ResolverInnerInputType
+        ) {
+            return this.dao.get(where)
+        }
+
+        @Mutation(type => Boolean , { name: `del${suffix}` })
+        async del (
+            @Arg('where' , { validate: true }) where: ResolverInnerInputType
+        ) {
+            return Boolean(this.dao.del(where , false))
+        }
+
+        modify: any
+
     }
 
     return ABCBaseResolver

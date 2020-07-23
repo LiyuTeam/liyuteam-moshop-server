@@ -1,26 +1,26 @@
 import { inject , provide , scope , ScopeEnum } from 'midway'
 import { Field , InputType , Resolver } from 'type-graphql'
-import { createResolver } from '../util/ResolverBuilder'
+import { resolverBuilder } from '../util/ResolverBuilder'
 import DictionaryValueEntity from '../entities/mongodb/Dictionary/DictionaryValueEntity'
-import { ABCDictionaryValueDao } from '../dao/dictionaryValuesDao'
-import { IBaseInput } from '../util/InputBuilder'
+import { IBaseDao } from '../util/DaoBuilder'
 
 @InputType()
-export class DictionaryValueInputType implements IBaseInput , Partial<DictionaryValueEntity> {
+export class DictionaryValueInputType extends DictionaryValueEntity {
     @Field() _id: string
-    comment: string
-    createdAt: Date
-    fkDict: any
-    name: string
-    status: number
-    title: string | null
-    uid: string
-    updatedAt: Date
-    valueType: number
+    @Field() createdAt: Date
+    @Field() name: string
+    @Field() status: number
+    @Field() title: string
+    @Field() uid: string
+    @Field() updatedAt: Date
+    @Field() valueType: number
 }
 
 const ABCDictionaryValueResolver =
-    createResolver('DictionaryValue' , DictionaryValueEntity , DictionaryValueInputType)
+    resolverBuilder(
+        'DictionaryValue' ,
+        DictionaryValueEntity ,
+        DictionaryValueInputType)
 
 @scope(ScopeEnum.Prototype)
 @provide('DictionaryValuesResolver')
@@ -28,6 +28,6 @@ const ABCDictionaryValueResolver =
 export class DictionaryValuesResolver extends ABCDictionaryValueResolver {
 
     @inject('DictionaryValueDao')
-    dictionaryValuesDao: typeof ABCDictionaryValueDao
+    dictionaryValuesDao: IBaseDao
 
 }

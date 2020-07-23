@@ -1,14 +1,13 @@
-import { createDao } from '../util/DaoBuilder'
-import DictionaryValueEntity from '../entities/mongodb/Dictionary/DictionaryValueEntity'
+import { daoBuilder , IBaseDaoPrototype } from '../util/DaoBuilder'
 import { provide } from 'midway'
 
-export const ABCDictionaryValueDao = createDao('DictionaryValueEntity' , DictionaryValueEntity)
+export const ABCDictionaryValueDao = daoBuilder('DictionaryValue')
 
 /**
  * DictionaryValuesDao - 数据字典值 Dao
  */
 @provide('DictionaryValueDao')
-export class DictionaryValueDao extends ABCDictionaryValueDao {
-
-    connect: 'Mongodb'
+export class DictionaryValueDao extends ABCDictionaryValueDao implements IBaseDaoPrototype {
+    connect = 'mongodb'
+    entityName = 'DictionaryValueEntity'
 }

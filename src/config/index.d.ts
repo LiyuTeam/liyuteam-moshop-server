@@ -10,8 +10,8 @@ export declare type GraphQLConfigType = {
     defaultEmptySchema: boolean,
     cors: {
         origin: string,
-        allowMethods: string,
-    },
+        allowMethods: string
+    }
 }
 
 export declare type DatabaseConfigType = {
@@ -20,6 +20,6 @@ export declare type DatabaseConfigType = {
         name: string,
         host: string,
         username?: string,
-        password?: string,
+        password?: string
     }[]
 }
