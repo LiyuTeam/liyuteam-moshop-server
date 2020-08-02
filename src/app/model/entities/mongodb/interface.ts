@@ -1,5 +1,5 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm/index'
-import { Field, Int } from 'type-graphql'
+import { Column , PrimaryGeneratedColumn } from 'typeorm/index'
+import { Field , Int } from 'type-graphql'
 
 export class CMongoEntity {
 
@@ -7,7 +7,7 @@ export class CMongoEntity {
     @PrimaryGeneratedColumn()
     _id: string
 
-    @Field(type => String, { description: 'uuid' })
+    @Field(type => String , { description: 'uuid' })
     @Column('uuid')
     uid: string
 
@@ -19,19 +19,19 @@ export class CMongoEntity {
     @Column()
     updatedAt: Date
 
-    @Field(type => Int, { description: '状态', defaultValue: 1 })
-    @Column({ type: 'int', default: 1 })
+    @Field(type => Int , { description: '状态' , defaultValue: 1 })
+    @Column({ type: 'int' , default: 1 })
     status: number
 
     @Field()
-    @Column({ comment: '备注', nullable: true })
+    @Column({ comment: '备注' , nullable: true })
     comment: string
 }
 
 /**
  * 用户账户
  */
-export declare class IUserAccountEntity implements CMongoEntity{
+export declare class IUserAccountEntity implements CMongoEntity {
     account: string
     password: string
     userName: string
@@ -69,7 +69,7 @@ export declare class IDictionaryEntity implements CMongoEntity {
 /**
  * 数据字典 - 字典值项
  */
-export declare class IDictionaryValuesEntity implements CMongoEntity{
+export declare class IDictionaryValuesEntity implements CMongoEntity {
     fkDict: any
 
     title: string | null
@@ -83,5 +83,22 @@ export declare class IDictionaryValuesEntity implements CMongoEntity{
     createdAt: Date
     status: number
     updatedAt: Date
+
+}
+
+export declare class IApplicationEntity implements CMongoEntity {
+    _id: string
+    comment: string
+    createdAt: Date
+    status: number
+    uid: string
+    updatedAt: Date
+
+    appID: string
+    appSecret: string
+    appName: string
+    appCode: string
+    appCreator: any
+    appVersion: string
 
 }
