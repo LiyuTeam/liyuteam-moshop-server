@@ -1,5 +1,5 @@
 import { IApplicationEntity } from '../interface'
-import { Column , Entity , PrimaryGeneratedColumn } from 'typeorm/index'
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm/index'
 import { Field } from 'type-graphql'
 import { provide } from 'midway'
 
@@ -54,4 +54,4 @@ export class ApplicationEntity implements IApplicationEntity {
     @Column()
     updatedAt: Date
 
-} 
+}

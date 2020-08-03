@@ -1,4 +1,4 @@
-import { Column , PrimaryGeneratedColumn } from 'typeorm/index'
+import { Column , Generated , PrimaryGeneratedColumn } from 'typeorm/index'
 import { Field , Int } from 'type-graphql'
 
 export class CMongoEntity {
@@ -8,7 +8,7 @@ export class CMongoEntity {
     _id: string
 
     @Field(type => String , { description: 'uuid' })
-    @Column('uuid')
+    @Generated('uuid')
     uid: string
 
     @Field({ description: '创建时间' })
@@ -101,4 +101,29 @@ export declare class IApplicationEntity implements CMongoEntity {
     appCreator: any
     appVersion: string
 
+}
+
+export declare class IUserRoleEntity implements CMongoEntity {
+    _id: string
+    comment: string
+    createdAt: Date
+    status: number
+    uid: string
+    updatedAt: Date
+
+    name: string
+
+}
+
+export declare class IUserRolePermissionEntity implements CMongoEntity {
+    _id: string
+    comment: string
+    createdAt: Date
+    status: number
+    uid: string
+    updatedAt: Date
+
+    name: string
+    type: string
+    value: string
 }

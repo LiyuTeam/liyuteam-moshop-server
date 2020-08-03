@@ -102,11 +102,15 @@ export interface ILoggerService extends IBaseService {
 export declare interface IDictionaryDao extends IModelService {
 }
 
+export declare interface IUserAccountDao extends IModelService {
+
+}
 
 /**
  * IBaseDao - base dao interface
  */
-export declare interface IBaseDao extends IModelService {}
+export declare interface IBaseDao extends IModelService {
+}
 
 export declare interface ITypeormService extends IBaseService {
 

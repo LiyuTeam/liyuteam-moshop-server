@@ -1,6 +1,6 @@
 import { IDictionaryDao , MidwayApplication } from '../../../interface'
 import { inject , provide } from 'midway'
-import { BaseDao } from './baseDao'
+import { BaseDao } from './BaseDao'
 import { IDictionaryEntity } from '../entities/mongodb/interface'
 
 /**
